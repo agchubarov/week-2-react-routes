@@ -8,9 +8,12 @@ import { bindActionCreators } from 'redux'
 
 import store, { history } from '../redux'
 
-import Home from '../components/home'
+// import Home from '../components/home'
 import DummyView from '../components/dummy-view'
 import NotFound from '../components/404'
+import Dashboard from '../components/dashboard'
+import DashboardMain from '../components/dashboard-main'
+import Profile from '../components/dashboard-profile'
 
 import Startup from './startup'
 
@@ -20,7 +23,7 @@ const OnlyAnonymousRoute = ({ component: Component, ...rest }) => {
       <Redirect to={{ pathname: '/' }} />
     ) : (
       <Component {...props} />
-    )
+      )
   return <Route {...rest} render={func} />
 }
 
@@ -83,7 +86,9 @@ export default (props) => {
         <StartupConnected>
           <Switch>
             <Route exact path="/" component={() => <DummyView />} />
-            <Route exact path="/dashboard" component={() => <Home />} />
+            <Route exact path="/dashboard" component={() => <Dashboard />} />
+            <Route exact path="/dashboard/main" component={() => <DashboardMain />} />
+            <Route exact path="/dashboard/profile/:username" component={() => <Profile />} />
             <PrivateRouteConnected exact path="/hidden-route" component={() => <DummyView />} />
             <Route component={() => <NotFound />} />
           </Switch>
